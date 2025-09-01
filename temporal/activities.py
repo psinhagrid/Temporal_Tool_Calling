@@ -8,6 +8,11 @@ from temporalio import activity
 # Use the same TOOL schema you used with Claude earlier (kept here for completeness)
 TOOLS = [
     {
+    "name": "wait_activity",
+    "description": "Waits 5 seconds and returns status",
+    "input_schema": {"type": "object", "properties": {}, "required": []},
+    },
+    {
         "name": "get_location",
         "description": "Get current location",
         "input_schema": {"type": "object", "properties": {}, "required": []},
@@ -143,6 +148,12 @@ async def get_weather(location: str) -> dict:
         "condition": "Partly Cloudy",
         "source": "dummy",
     }
+
+@activity.defn
+async def wait_activity() -> dict:
+    # Wait 5 seconds
+    await asyncio.sleep(5)
+    return {"status": "done", "waited": 5}
 
 
 @activity.defn

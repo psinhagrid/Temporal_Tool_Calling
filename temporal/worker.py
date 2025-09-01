@@ -24,6 +24,7 @@ async def main():
             activities.tell_joke,
             activities.roll_dice,
             activities.recommend_movie,
+            activities.wait_activity
         ],
     )
 
